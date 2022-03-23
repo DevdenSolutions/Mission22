@@ -38,7 +38,7 @@ public class CreateImageTarget : MonoBehaviour
         DOEH.StatusFilter = DefaultAreaTargetEventHandler.TrackingStatusFilter.Tracked;
 
         DOEH.OnTargetFound = new UnityEngine.Events.UnityEvent();
-        DOEH.OnTargetFound.AddListener(OnTargetFound);
+        DOEH.OnTargetFound.AddListener(()=> OnTargetFound(SoldierName));
 
         DOEH.OnTargetLost = new UnityEngine.Events.UnityEvent();
         DOEH.OnTargetLost.AddListener(OnTargetLost);
@@ -46,14 +46,14 @@ public class CreateImageTarget : MonoBehaviour
         Debug.LogError("Created Images");
     }
 
-    void OnTargetFound()
+    void OnTargetFound(string name)
     {
-        _testingText.text = "Found The Image";
+        _testingText.text = name;
     }
 
     void OnTargetLost()
     {
-        _testingText.text = "Lost the Image";
+        _testingText.text = "New Text";
     }
 }
 
