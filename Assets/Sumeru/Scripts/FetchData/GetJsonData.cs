@@ -58,7 +58,7 @@ public class GetJsonData : MonoBehaviour
           {
               Debug.Log(exp.Message + "" + exp.StackTrace);
           }
-        ).Finally(() => { AddImageToList.Instance.AddImage(); AddImageToList.Instance.MakeImageTargets();  });
+        ).Finally(() => { AddImageToList.Instance.GetImagesFromURL();});
     }
 
 }

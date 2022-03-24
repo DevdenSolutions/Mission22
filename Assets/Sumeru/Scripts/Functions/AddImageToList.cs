@@ -1,4 +1,7 @@
+using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class AddImageToList : MonoBehaviour
 {
@@ -25,39 +28,37 @@ public class AddImageToList : MonoBehaviour
     #endregion
 
 
-    [SerializeField] Texture2D[] _imagesToDetect;
-
     private void Start()
     {
     }
 
-
-    public void AddImage()
+    public void GetImagesFromURL()
     {
         int i = 0;
         foreach (var x in SoldierDataManager.Instance._soldierList)
         {
-            x.TargetImage = _imagesToDetect[i];
+            StartCoroutine(GetImages(x.TrackingImageURL, i, (tex) =>
+            {
+                x.TargetImage = tex;
+                CreateImageTarget.Instance.CreateTheImageTarget(x.TargetImage, x.Name); //Creating Image Targets from the texture we got from URL
+            }));
             i++;
         }
     }
 
-    public void MakeImageTargets()
+    IEnumerator GetImages(string URL, int index, Action<Texture2D> callback = null)
     {
-        Debug.LogError("Called MakeImageTargets");
+        UnityWebRequest www = UnityWebRequestTexture.GetTexture(URL);
+        yield return www.SendWebRequest();
 
-        foreach (var x in SoldierDataManager.Instance._soldierList)
+        if (www.result != UnityWebRequest.Result.Success)
         {
-            print("Image: " + x.TargetImage.name);
-            print("Name: " + x.Name);
+            Debug.Log(www.error);
         }
-
-        foreach (var x in SoldierDataManager.Instance._soldierList)
+        else
         {
-            CreateImageTarget.Instance.CreateTheImageTarget(x.TargetImage, x.Name);
-            print("Creating Image");
+            callback?.Invoke(((DownloadHandlerTexture)www.downloadHandler).texture);
         }
-
 
     }
 }
