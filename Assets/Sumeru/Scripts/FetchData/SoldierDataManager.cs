@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class SoldierDataManager : MonoBehaviour
 {
@@ -49,22 +50,18 @@ public class SoldierDataManager : MonoBehaviour
         }
     }
 
-    public void FindSoldier(string soldierName)
+    public void FindSoldier(string soldierName, Action<iSoldier> action = null)
     {
-        var URL = _soldierList.Where(e => e.Name == soldierName).Select(e => e.TrackingImageURL);
+        var URL = _soldierList.Where(e => e.Name == soldierName).Select(e => e).FirstOrDefault();
 
-        if (URL.GetEnumerator().MoveNext())
+        if (URL != null)
         {
-            foreach (var x in URL)
-            {
-                print("The URL is: " + x);
-            }
+            action?.Invoke(URL);
         }
         else
         {
             print("Soldier Not Found");
         }
-
     }
 
 }

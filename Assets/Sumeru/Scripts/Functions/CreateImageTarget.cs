@@ -43,17 +43,21 @@ public class CreateImageTarget : MonoBehaviour
         DOEH.OnTargetLost = new UnityEngine.Events.UnityEvent();
         DOEH.OnTargetLost.AddListener(OnTargetLost);
 
+        CreateUI.Instance.InstantiateUIFromJson(imageTarget.gameObject.transform, SoldierName);
+
         Debug.LogError("Created Images");
     }
 
     void OnTargetFound(string name)
     {
         _testingText.text = name;
+        ManageTargetBehaviour.Instance.OnTargetFound();
     }
 
     void OnTargetLost()
     {
         _testingText.text = "New Text";
+        ManageTargetBehaviour.Instance.OnTargetLost();
     }
 }
 

@@ -28,10 +28,6 @@ public class AddImageToList : MonoBehaviour
     #endregion
 
 
-    private void Start()
-    {
-    }
-
     public void GetImagesFromURL()
     {
         int i = 0;
