@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.UI;
 
 public class SoldierDataManager : MonoBehaviour
 {
@@ -26,17 +27,17 @@ public class SoldierDataManager : MonoBehaviour
 
     #endregion
 
-
     public List<iSoldier> _soldierList = new List<iSoldier>();
     void Start()
     {
       //  CreateSoldier("Soldier1", "This is the URL man", "DGP", "US Army");
     }
 
-    public void CreateSoldier(string Name, string url, string designation, string type)
+    public void CreateSoldier(string Name, string url, string designation, string type,Texture2D imageToDetect=null)
     {
-        iSoldier LocalSoldier = SoldierFactory.GetSoldierInstance(Name, url, designation, type);
+        iSoldier LocalSoldier = SoldierFactory.GetSoldierInstance(Name, url, designation, type,imageToDetect);
         _soldierList.Add(LocalSoldier);
+        CreateImageTarget.Instance.CreateTheImageTarget(imageToDetect,Name);
     }
 
     public void PrintList()
@@ -69,7 +70,7 @@ public class SoldierDataManager : MonoBehaviour
 
 public class SoldierFactory
 {
-    public static iSoldier GetSoldierInstance(string name, string URL, string designation, string type)
+    public static iSoldier GetSoldierInstance(string name, string URL, string designation, string type, Texture2D imageToDetect=null)
     {
         iSoldier remoteSoldier;
 
@@ -78,6 +79,10 @@ public class SoldierFactory
         remoteSoldier.TrackingImageURL = URL;
         remoteSoldier.Designation = designation;
         remoteSoldier.Type = type;
+        if (imageToDetect != null)
+        {
+            remoteSoldier.TargetImage = imageToDetect;
+        }
 
         return remoteSoldier;
     }

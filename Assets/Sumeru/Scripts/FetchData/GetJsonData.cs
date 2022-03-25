@@ -1,5 +1,8 @@
 using Proyecto26;
+using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class GetJsonData : MonoBehaviour
 {
@@ -51,14 +54,34 @@ public class GetJsonData : MonoBehaviour
             foreach (var x in JsonData)
             {
                 print(x.Name);
-                SoldierDataManager.Instance.CreateSoldier(x.Name, x.TrackingImageURL, x.Designation, x.Type);
+                StartCoroutine(GetImages(x.TrackingImageURL,(tex)=> {
+
+                    SoldierDataManager.Instance.CreateSoldier(x.Name, x.TrackingImageURL, x.Designation, x.Type, tex);  //Creating the soldier here from the server data
+                }));
+               
             }
         }
         ).Catch(exp =>
           {
               Debug.Log(exp.Message + "" + exp.StackTrace);
           }
-        ).Finally(() => { AddImageToList.Instance.GetImagesFromURL();});
+        );
+    }
+
+    IEnumerator GetImages(string URL, Action<Texture2D> callback = null)
+    {
+        UnityWebRequest www = UnityWebRequestTexture.GetTexture(URL);
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+            callback?.Invoke(((DownloadHandlerTexture)www.downloadHandler).texture);
+        }
+
     }
 
 }
