@@ -28,16 +28,16 @@ public class SoldierDataManager : MonoBehaviour
     #endregion
 
     public List<iSoldier> _soldierList = new List<iSoldier>();
-    void Start()
-    {
-      //  CreateSoldier("Soldier1", "This is the URL man", "DGP", "US Army");
-    }
+
 
     public void CreateSoldier(string Name, string url, string designation, string type,Texture2D imageToDetect=null)
     {
         iSoldier LocalSoldier = SoldierFactory.GetSoldierInstance(Name, url, designation, type,imageToDetect);
         _soldierList.Add(LocalSoldier);
-        CreateImageTarget.Instance.CreateTheImageTarget(imageToDetect,Name);
+        CreateImageTarget.Instance.CreateTheImageTarget(imageToDetect,Name, (go)=>
+        {
+            LocalSoldier.ImageTargetGameObject = go;
+        });
     }
 
     public void PrintList()
@@ -48,6 +48,7 @@ public class SoldierDataManager : MonoBehaviour
             print("URL: " + x.TrackingImageURL);
             print("Designation: " + x.Designation);
             print("Type: " + x.Type);
+            print("GameObject: " + x.ImageTargetGameObject);
         }
     }
 

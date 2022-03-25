@@ -10,4 +10,6 @@ public interface iSoldier
     string Type { get; set; }
 
     UnityEngine.Texture2D TargetImage { get; set; }
+
+    UnityEngine.GameObject ImageTargetGameObject { get; set; }
 }

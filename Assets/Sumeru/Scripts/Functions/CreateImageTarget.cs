@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using TMPro;
 using UnityEngine;
 using Vuforia;
-using TMPro;
 
 public class CreateImageTarget : MonoBehaviour
 {
@@ -29,7 +28,7 @@ public class CreateImageTarget : MonoBehaviour
 
     [SerializeField] GameObject _imageParent;
     [SerializeField] TMP_Text _testingText;
-    public void CreateTheImageTarget(Texture2D ImagesToDetect, string SoldierName)
+    public void CreateTheImageTarget(Texture2D ImagesToDetect, string SoldierName, Action<GameObject> action = null)
     {
         ObserverBehaviour imageTarget = VuforiaBehaviour.Instance.ObserverFactory.CreateImageTarget(ImagesToDetect, 1f, SoldierName);
         imageTarget.transform.SetParent(_imageParent.transform);
@@ -38,13 +37,14 @@ public class CreateImageTarget : MonoBehaviour
         DOEH.StatusFilter = DefaultAreaTargetEventHandler.TrackingStatusFilter.Tracked;
 
         DOEH.OnTargetFound = new UnityEngine.Events.UnityEvent();
-        DOEH.OnTargetFound.AddListener(()=> OnTargetFound(SoldierName));
+        DOEH.OnTargetFound.AddListener(() => OnTargetFound(SoldierName));
 
         DOEH.OnTargetLost = new UnityEngine.Events.UnityEvent();
         DOEH.OnTargetLost.AddListener(OnTargetLost);
 
         CreateUI.Instance.InstantiateUIFromJson(imageTarget.gameObject.transform, SoldierName);
 
+        action?.Invoke(imageTarget.gameObject);
         Debug.LogError("Created Images");
     }
 

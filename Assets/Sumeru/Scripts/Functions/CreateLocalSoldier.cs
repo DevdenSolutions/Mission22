@@ -1,4 +1,5 @@
 using UnityEngine;
+using Vuforia;
 
 public class CreateLocalSoldier : MonoBehaviour
 {
@@ -6,9 +7,9 @@ public class CreateLocalSoldier : MonoBehaviour
 
     private void Start()
     {
-        Invoke("CSL", 1f);
+        VuforiaApplication.Instance.OnVuforiaStarted += CreateSoldierLocally;
     }
-    public void CSL()
+    public void CreateSoldierLocally() //Creating soldier image targets from locally stored images
     {
         SoldierDataManager.Instance.CreateSoldier("asdasda", "adasdasd", "asdasdad", "adadasd", _imagesToAdd);
     }

@@ -14,7 +14,7 @@ public class CheckTheThing : MonoBehaviour
 
     private void Start()
     {
-      //  VuforiaApplication.Instance.OnVuforiaStarted += CreateImageTargetFromSideLoadedTexture;
+      // VuforiaApplication.Instance.OnVuforiaStarted+=CreateImageTargetFromSideLoadedTexture;
     }
     public void ChangeTheImage()
     {

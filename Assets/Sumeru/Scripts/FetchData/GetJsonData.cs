@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
+using Vuforia;
 
 public class GetJsonData : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class GetJsonData : MonoBehaviour
 
     private void Start()
     {
-        Get();
+        VuforiaApplication.Instance.OnVuforiaStarted += Get;
     }
     public void Get()
     {
@@ -56,7 +57,7 @@ public class GetJsonData : MonoBehaviour
                 print(x.Name);
                 StartCoroutine(GetImages(x.TrackingImageURL,(tex)=> {
 
-                    SoldierDataManager.Instance.CreateSoldier(x.Name, x.TrackingImageURL, x.Designation, x.Type, tex);  //Creating the soldier here from the server data
+                    SoldierDataManager.Instance.CreateSoldier(x.Name, x.TrackingImageURL, x.Designation, x.Type, tex);  //Creating the soldier image targets here from the server data
                 }));
                
             }
