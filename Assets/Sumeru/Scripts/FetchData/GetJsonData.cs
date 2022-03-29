@@ -28,15 +28,16 @@ public class GetJsonData : MonoBehaviour
 
     #endregion
 
-    private readonly string baseURL = "https://raex1311.github.io/VMA/VMA.json";
+    //private readonly string baseURL = "https://raex1311.github.io/VMA/VMA.json";
+    private readonly string baseURL = "https://mission22-99754-default-rtdb.firebaseio.com/Soldiers.json";
     public MyRoot[] JsonData;
 
 
     private void Start()
     {
-        VuforiaApplication.Instance.OnVuforiaStarted += Get;
+        VuforiaApplication.Instance.OnVuforiaStarted += CreateSoldierFromServer;
     }
-    public void Get()
+    public void CreateSoldierFromServer()
     {
         RestClient.DefaultRequestHeaders["Authorization"] = "Bearer";
         RequestHelper requestOptions = null;
@@ -57,7 +58,7 @@ public class GetJsonData : MonoBehaviour
                 print(x.Name);
                 StartCoroutine(GetImages(x.TrackingImageURL,(tex)=> {
 
-                    SoldierDataManager.Instance.CreateSoldier(x.Name, x.TrackingImageURL, x.Designation, x.Type, tex);  //Creating the soldier image targets here from the server data
+                    SoldierDataManager.Instance.CreateSoldier(x.Name, x.TrackingImageURL,x.Hometown,x.DOB,x.DOD, x.Designation, x.Branch,x.ShortBio, tex);  //Creating the soldier image targets here from the server data
                 }));
                
             }
@@ -92,6 +93,10 @@ public class MyRoot
 {
     public string Name;
     public string TrackingImageURL;
+    public string Hometown;
+    public string DOB;
+    public string DOD;
     public string Designation;
-    public string Type;
+    public string Branch;
+    public string ShortBio;
 }

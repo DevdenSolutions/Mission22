@@ -28,13 +28,16 @@ public class CreateImageTarget : MonoBehaviour
 
     [SerializeField] GameObject _imageParent;
     [SerializeField] TMP_Text _testingText;
+    [SerializeField] GameObject _soldierStatuePrefab;
     public void CreateTheImageTarget(Texture2D ImagesToDetect, string SoldierName, Action<GameObject> action = null)
     {
         ObserverBehaviour imageTarget = VuforiaBehaviour.Instance.ObserverFactory.CreateImageTarget(ImagesToDetect, 1f, SoldierName);
         imageTarget.transform.SetParent(_imageParent.transform);
         imageTarget.transform.localPosition = Vector3.zero;
+        Instantiate(_soldierStatuePrefab, imageTarget.transform);
+
         DefaultAreaTargetEventHandler DOEH = imageTarget.gameObject.AddComponent<DefaultAreaTargetEventHandler>();
-        DOEH.StatusFilter = DefaultAreaTargetEventHandler.TrackingStatusFilter.Tracked;
+        DOEH.StatusFilter = DefaultAreaTargetEventHandler.TrackingStatusFilter.Tracked_ExtendedTracked;
 
         DOEH.OnTargetFound = new UnityEngine.Events.UnityEvent();
         DOEH.OnTargetFound.AddListener(() => OnTargetFound(SoldierName));

@@ -28,15 +28,21 @@ public class CreateUI : MonoBehaviour
     public void InstantiateUIFromJson(Transform imageTarget, string Name)
     {
         GameObject go = Instantiate(_uiPrefab, imageTarget);
-        AddDataToUI(go.transform.GetChild(0).gameObject.GetComponent<UIDetails>(), Name);
+        AddDataToUI(go.GetComponent<UIDetails>(), Name);
     }
 
     void AddDataToUI(UIDetails uIDetails, string Name)
     {
-        uIDetails.title.text = Name;
         SoldierDataManager.Instance.FindSoldier(Name, (e) =>
          {
-             Debug.LogError("Printing from CreateUI: " + e.TrackingImageURL + e.Designation + e.Type);
+             Debug.LogError("Printing from CreateUI: " + e.TrackingImageURL + e.Designation + e.Branch);
+             uIDetails.Hometown.text ="Hometown :" + e.Hometown;
+             uIDetails.Name.text ="Name: " + e.Name;
+             uIDetails.DOB.text ="DOB: " + e.DOB;
+             uIDetails.DOD.text ="DOD: " + e.DOD;
+             uIDetails.Designation.text ="Rank: " + e.Designation;
+             uIDetails.Branch.text ="Branch: " + e.Branch;
+             uIDetails.shortBio.text = e.ShortBio;
          });
     }
 }

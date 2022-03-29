@@ -27,12 +27,12 @@ public class SoldierDataManager : MonoBehaviour
 
     #endregion
 
-    public List<iSoldier> _soldierList = new List<iSoldier>();
+    public List<ISoldier> _soldierList = new List<ISoldier>();
 
 
-    public void CreateSoldier(string Name, string url, string designation, string type,Texture2D imageToDetect=null)
+    public void CreateSoldier(string Name, string url, string Hometown, string DOB, string DOD, string designation, string branch,string shortBio, Texture2D imageToDetect=null)
     {
-        iSoldier LocalSoldier = SoldierFactory.GetSoldierInstance(Name, url, designation, type,imageToDetect);
+        ISoldier LocalSoldier = SoldierFactory.GetSoldierInstance(Name,Hometown,DOB,DOD, url, designation, branch,shortBio, imageToDetect);
         _soldierList.Add(LocalSoldier);
         CreateImageTarget.Instance.CreateTheImageTarget(imageToDetect,Name, (go)=>
         {
@@ -47,12 +47,12 @@ public class SoldierDataManager : MonoBehaviour
             print("Name: " + x.Name);
             print("URL: " + x.TrackingImageURL);
             print("Designation: " + x.Designation);
-            print("Type: " + x.Type);
+            print("Type: " + x.Branch);
             print("GameObject: " + x.ImageTargetGameObject);
         }
     }
 
-    public void FindSoldier(string soldierName, Action<iSoldier> action = null)
+    public void FindSoldier(string soldierName, Action<ISoldier> action = null)
     {
         var URL = _soldierList.Where(e => e.Name == soldierName).Select(e => e).FirstOrDefault();
 
@@ -71,15 +71,19 @@ public class SoldierDataManager : MonoBehaviour
 
 public class SoldierFactory
 {
-    public static iSoldier GetSoldierInstance(string name, string URL, string designation, string type, Texture2D imageToDetect=null)
+    public static ISoldier GetSoldierInstance(string name, string Hometown, string DOB, string DOD, string URL, string designation, string branch, string shortBio, Texture2D imageToDetect=null)
     {
-        iSoldier remoteSoldier;
+        ISoldier remoteSoldier;
 
         remoteSoldier = new Soldier();
         remoteSoldier.Name = name;
+        remoteSoldier.Hometown = Hometown;
+        remoteSoldier.DOB = DOB;
+        remoteSoldier.DOD = DOD;
         remoteSoldier.TrackingImageURL = URL;
         remoteSoldier.Designation = designation;
-        remoteSoldier.Type = type;
+        remoteSoldier.Branch = branch;
+        remoteSoldier.ShortBio = shortBio;
         if (imageToDetect != null)
         {
             remoteSoldier.TargetImage = imageToDetect;

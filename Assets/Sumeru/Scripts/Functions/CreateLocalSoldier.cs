@@ -11,6 +11,6 @@ public class CreateLocalSoldier : MonoBehaviour
     }
     public void CreateSoldierLocally() //Creating soldier image targets from locally stored images
     {
-        SoldierDataManager.Instance.CreateSoldier("asdasda", "adasdasd", "asdasdad", "adadasd", _imagesToAdd);
+       // SoldierDataManager.Instance.CreateSoldier("asdasda", "adasdasd", "asdasdad", "adadasd","adsadad","asdsadad","adasdada","asdsadsad", _imagesToAdd);
     }
 }
