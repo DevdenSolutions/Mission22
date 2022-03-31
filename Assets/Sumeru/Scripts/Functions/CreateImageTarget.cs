@@ -34,10 +34,13 @@ public class CreateImageTarget : MonoBehaviour
         ObserverBehaviour imageTarget = VuforiaBehaviour.Instance.ObserverFactory.CreateImageTarget(ImagesToDetect, 1f, SoldierName);
         imageTarget.transform.SetParent(_imageParent.transform);
         imageTarget.transform.localPosition = Vector3.zero;
-        Instantiate(_soldierStatuePrefab, imageTarget.transform);
+        // Instantiate(_soldierStatuePrefab, imageTarget.transform);
 
-        DefaultAreaTargetEventHandler DOEH = imageTarget.gameObject.AddComponent<DefaultAreaTargetEventHandler>();
-        DOEH.StatusFilter = DefaultAreaTargetEventHandler.TrackingStatusFilter.Tracked_ExtendedTracked;
+        //DefaultAreaTargetEventHandler DOEH = imageTarget.gameObject.AddComponent<DefaultAreaTargetEventHandler>();
+        //DOEH.StatusFilter = DefaultAreaTargetEventHandler.TrackingStatusFilter.Tracked_ExtendedTracked;
+
+        DefaultObserverEventHandler DOEH = imageTarget.gameObject.AddComponent<DefaultObserverEventHandler>();
+        DOEH.StatusFilter = DefaultObserverEventHandler.TrackingStatusFilter.Tracked_ExtendedTracked_Limited;
 
         DOEH.OnTargetFound = new UnityEngine.Events.UnityEvent();
         DOEH.OnTargetFound.AddListener(() => OnTargetFound(SoldierName));

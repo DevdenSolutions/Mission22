@@ -3519,7 +3519,6 @@ GameObject:
   - component: {fileID: 7079316913251044141}
   - component: {fileID: 7079316913251044332}
   - component: {fileID: 7079316913251044333}
-  - component: {fileID: 7079316913251044334}
   m_Layer: 0
   m_Name: ShortBioUI
   m_TagString: Untagged
@@ -3544,7 +3543,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -5.19, y: 12.93}
+  m_AnchoredPosition: {x: 2.37, y: 14.47}
   m_SizeDelta: {x: 500, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7079316913251044141
@@ -3608,19 +3607,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7079316913251044334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7079316913251044105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98e15bfecf89a0947996c8fd5c766868, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shortBio: {fileID: 7079316913251044340}
 --- !u!1 &7079316913251044106
 GameObject:
   m_ObjectHideFlags: 0
@@ -3668,7 +3654,6 @@ GameObject:
   - component: {fileID: 7079316913251044289}
   - component: {fileID: 7079316913251044131}
   - component: {fileID: 7079316913251044351}
-  - component: {fileID: 7079316913251044336}
   m_Layer: 0
   m_Name: Showcase
   m_TagString: Untagged
@@ -3735,25 +3720,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7079316913251044336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7079316913251044107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afefa8b2301fda5439063ece8afdf18f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: {fileID: 0}
-  Hometown: {fileID: 0}
-  DOB: {fileID: 0}
-  DOD: {fileID: 0}
-  Designation: {fileID: 0}
-  Branch: {fileID: 0}
-  shortBio: {fileID: 0}
 --- !u!1 &7079316913251044108
 GameObject:
   m_ObjectHideFlags: 0
@@ -3874,7 +3840,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7079316913251044341}
   m_HandleRect: {fileID: 7079316913251044299}
   m_Direction: 2
-  m_Value: 0.9999852
+  m_Value: 0.99998593
   m_Size: 0.7523918
   m_NumberOfSteps: 0
   m_OnValueChanged:
