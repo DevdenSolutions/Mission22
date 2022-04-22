@@ -51,7 +51,7 @@ public class CreateImageTarget : MonoBehaviour
         CreateUI.Instance.InstantiateUIFromJson(imageTarget.gameObject.transform, SoldierName);
 
         action?.Invoke(imageTarget.gameObject);
-        Debug.LogError("Created Images");
+
     }
 
     void OnTargetFound(string name)

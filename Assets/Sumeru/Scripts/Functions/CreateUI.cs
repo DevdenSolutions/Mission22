@@ -62,7 +62,7 @@ public class CreateUI : MonoBehaviour
     {
         SoldierDataManager.Instance.FindSoldier(Name, (e) =>
          {
-             Debug.LogError("Printing from CreateUI: " + e.TrackingImageURL + e.Designation + e.Branch);
+            
              uIDetails.Hometown.text = "Hometown :" + e.Hometown;
              uIDetails.Name.text = "Name: " + e.Name;
              uIDetails.DOB.text = "DOB: " + e.DOB;
