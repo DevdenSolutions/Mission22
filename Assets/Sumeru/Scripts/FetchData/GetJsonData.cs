@@ -56,13 +56,13 @@ public class GetJsonData : MonoBehaviour
         // VuforiaApplication.Instance.OnVuforiaStarted += CreateSoldierFromServer;
 
         //Using Strategy 3
-        VuforiaApplication.Instance.OnVuforiaStarted += CheckEtag;
+       // VuforiaApplication.Instance.OnVuforiaStarted += CheckEtag;
 
         //Using Strategy 2
         //VuforiaApplication.Instance.OnVuforiaStarted += CreateSoldierFromServer2;
     }
 
-    void CheckEtag()
+    public void CheckEtag()
     {
         RestClient.Request(new RequestHelper
         {
@@ -103,7 +103,7 @@ public class GetJsonData : MonoBehaviour
 
             }
             else if (isOffline)
-            {
+            { 
                 OfflineStrategy();
             }
             else
@@ -318,7 +318,6 @@ public class GetJsonData : MonoBehaviour
         Debug.LogError("Running from Coroutine");
         CheckAndWriteData();
     }
-
 }
 
 [System.Serializable]

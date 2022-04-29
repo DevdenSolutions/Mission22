@@ -48,6 +48,7 @@ public class SaveDataLocalStorage : MonoBehaviour
         soldierData.DOD = data.DOD;
         soldierData.Branch = data.Branch;
         soldierData.Designation = data.Designation;
+        soldierData.ShortBio = data.ShortBio;
         soldierData.ImageWidth = texture.width;
         soldierData.ImageHeight = texture.height;
         soldierData.ImageToDetect = texture.EncodeToPNG();
